@@ -1,0 +1,96 @@
+<div>
+    <div id="tabs-container">
+        <ul class="tabs-menu">
+            {% for type in types %}
+                {% if loop.index == 1 %}
+                    <li class="current">
+                        <a href="#tab-{{ loop.index }}"> {{ type.type }} </a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="#tab-{{ loop.index }}"> {{ type.type }} </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <div class="tab">
+            {% for type in types %}
+                <div  id="tab-{{ loop.index }}" class="tab-content">
+                    <table>
+                        <th class="id">{{ labels.id }}</th>
+                        <th class="name">{{ labels.name }}</th>
+                        <th class="phone">{{ labels.phone }}</th>
+                        <th class="email">{{ labels.email }}</th>
+                        <th class="comment">{{ labels.comment }}</th>
+                        <th class="company">{{ labels.company }}</th>
+                        <th class="status">{{ labels.status }}</th>
+                        <th class="info">{{ labels.info }}</th>
+                        <th class="date">{{ labels.date }}</th>
+                        <th class="update">{{ labels.update }}</th>
+                        <th class="delete">{{ labels.delete }}</th>
+
+                        {% for content in type.content %}
+                            <tr>
+                                <form name="callback-page" method="post" action="{{ current_url }}">
+                                    {% if content.id != '' %}
+                                        <td class="id">{{ content.id }}</td>
+                                        <input type="hidden" name="id" value="{{ content.id }}" />
+                                    {% endif %}
+
+                                    {% if content.name != '' %}
+                                        <td class="name">{{ content.name }}</td>
+                                    {% endif %}
+
+                                    {% if content.phone != '' %}
+                                        <td class="phone">{{ content.phone }}</td>
+                                    {% endif %}
+
+                                    {% if content.email != '' %}
+                                        <td class="email">{{ content.email }}</td>
+                                    {% endif %}
+
+                                    {% if content.comment != '' %}
+                                        <td class="comment">{{ content.comment }}</td>
+                                    {% endif %}
+
+                                    {% if content.company != '' %}
+                                        <td class="company">{{ content.company }}</td>
+                                    {% endif %}
+
+                                    {% if content.status != '' %}
+                                        <td class="status">
+                                            <select name="status" title="status">
+                                                {% for key, status in statuses %}
+                                                    <option
+                                                            value="{{ key }}"
+                                                            {% if key == content.status %}
+                                                                selected="selected"
+                                                            {% endif %}
+                                                    >{{ status }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+                                    {% endif %}
+
+                                    {% if content.info != '' %}
+                                        <td class="info">{{ content.info }}</td>
+                                    {% endif %}
+
+                                    {% if content.date != '' %}
+                                        <td class="date">{{ content.date }}</td>
+                                    {% endif %}
+                                    <td class="update">
+                                        <input type="submit" name="update" value="update"/>
+                                    </td>
+                                    <td class="delete">
+                                        <input type="submit" name="delete" value="delete"/>
+                                    </td>
+                                </form>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

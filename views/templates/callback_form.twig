@@ -1,0 +1,60 @@
+<div>
+    <div class="thank-you" style="display:none;" id="thank-you{{ form.content.formID }}">
+        {{ form.content.thankYouText }}
+    </div>
+    <form
+            action="#"
+            method="post"
+            name="callback{{ form.content.formID }}"
+            id="callback{{ form.content.formID }}"
+            data-url="{{ form.content.url }}"
+            class="callback-form"
+            onsubmit="return false;"
+    >
+        {% if form.content.formTitle !='' %}
+            <span class="form-title">
+                {{ form.content.formTitle }}
+            </span>
+        {% endif %}
+        {% if form.content.formDescription !='' %}
+            <div class="form-description">
+                {{ form.content.formDescription }}
+            </div>
+        {% endif %}
+        <input type="hidden" name ="type" value="{{ form.content.type }}" />
+        {% for key, field in form %}
+            {% if key != 'content' %}
+                {% if key == 'comment' %}
+                    {% if field.show !='' %}
+                        <div class="form_field">
+                            <textarea
+                                    id="{{ key }}{{ form.content.formID }}"
+                                    name="{{ key }}"
+                                    placeholder="{{ field.placeholder }}"
+                                    class="{{ field.class }}"
+                                    data-error="{{ field.error }}"
+                            ></textarea>
+                            <label for="{{ key }}">{{ field.placeholder }}</label>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    {% if field.show !='' %}
+                        <div class="form_field">
+                            <input
+                                    id="{{ key }}{{ form.content.formID }}"
+                                    placeholder="{{ field.placeholder }}"
+                                    name="{{ key }}"
+                                    class="{{ field.class }}"
+                                    data-error="{{ field.error }}"
+                            />
+                            <label for="{{ key }}{{ form.content.formID }}">{{ field.placeholder }}</label>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        <div class="btn yellow">
+            <input type="submit" id="submit{{ form.content.formID }}" name="submit" value="{{ form.content.submitText }}">
+        </div>
+    </form>
+</div>

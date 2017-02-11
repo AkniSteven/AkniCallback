@@ -1,0 +1,21 @@
+{
+  "name": "akni/akni_callback",
+  "description": "akni callback for wp",
+  "type": "Project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "stevenakni",
+      "email": "stevenaknidev@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "twig/twig": "1.24.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "AkniCallback\\": ""
+    }
+  }
+}
